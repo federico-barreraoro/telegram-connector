@@ -1,5 +1,7 @@
-package org.mule.extension.mule.telegram.internal;
+package org.mule.extension.mule.telegram.internal.configurations;
 
+import org.mule.extension.mule.telegram.internal.TelegramConnectionProvider;
+import org.mule.extension.mule.telegram.internal.TelegramOperations;
 import org.mule.runtime.extension.api.annotation.*;
 import org.mule.runtime.extension.api.annotation.Operations;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
@@ -61,4 +63,5 @@ public class TelegramConfiguration {
   public void setPort(Integer port) {
     this.port = port;
   }
+
 }

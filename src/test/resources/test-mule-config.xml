@@ -1,19 +1,32 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:mule-telegram="http://www.mulesoft.org/schema/mule/mule-telegram"
+      xmlns:mule-telegram="http://www.mulesoft.org/schema/mule/telegram"
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-          http://www.mulesoft.org/schema/mule/mule-telegram http://www.mulesoft.org/schema/mule/mule-telegram/current/mule-mule-telegram.xsd">
+         http://www.mulesoft.org/schema/mule/telegram http://www.mulesoft.org/schema/mule/telegram/current/mule-telegram.xsd">
 
-    <mule-telegram:config name="config" configId="configId">
-        <mule-telegram:connection requiredParameter="aValue" />
+    <mule-telegram:config name="Telegram_Config">
+        <mule-telegram:connection token="1002692747:AAGnVAmRTxlR335bWe_CZKB1CbDSVfaWUE8"/>
     </mule-telegram:config>
 
-    <flow name="sayHiFlow">
-        <mule-telegram:say-hi person="Mariano Gonzalez"/>
+    <flow name="sendMessage">
+        <mule-telegram:send-message config-ref="Telegram_Config" chatId="1204698965" text="Hi Federico" />
     </flow>
 
-    <flow name="retrieveInfoFlow">
-        <mule-telegram:retrieve-info config-ref="config"/>
+    <flow name="sendNotFoundMessage">
+        <mule-telegram:send-message config-ref="Telegram_Config" chatId="12046989653" text="Hi Federico" />
     </flow>
+
+    <flow name="getUpdates">
+        <mule-telegram:get-updates config-ref="Telegram_Config" watermark="false">
+            <scheduling-strategy >
+                <fixed-frequency />
+            </scheduling-strategy>
+        </mule-telegram:get-updates>
+        <logger level="INFO" message="#[output application/json --- payload]]"/>
+    </flow>
+
+<!--    <flow name="retrieveInfoFlow">-->
+<!--        <mule-telegram:retrieve-info config-ref="config"/>-->
+<!--    </flow>-->
 
 </mule>

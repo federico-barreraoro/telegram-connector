@@ -2,6 +2,8 @@ package org.mule.extension.mule.telegram.internal;
 
 import java.io.IOException;
 import javax.inject.Inject;
+
+import org.mule.extension.mule.telegram.internal.configurations.TelegramConfiguration;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
@@ -35,9 +37,6 @@ import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
  * caches connections or simply {@link ConnectionProvider} if you want a new connection each time something requires one.
  */
 public class TelegramConnectionProvider implements PoolingConnectionProvider<TelegramConnection> {
-
-  private HttpClient httpClient;
-  private HttpRequestBuilder httpRequestBuilder;
 
   @ParameterGroup(name = "Connection")
   TelegramConfiguration config;
